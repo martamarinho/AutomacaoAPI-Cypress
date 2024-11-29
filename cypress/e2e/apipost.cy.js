@@ -5,17 +5,15 @@ describe.only('Testando o envio de um POST', () => {
         const names = ["Fluffy", "Rex", "Mittens", "Whiskers"];
         const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
         const randomName = names[Math.floor(Math.random() * names.length)];
-       // const uniqueName = `${randomName}-${randomAnimal}-${Math.floor(Math.random() * 100)}`;
-        //const uniqueName = `${randomName}-${randomAnimal}-${Math.floor}`;
         const uniqueName = `${randomName}-${randomAnimal}`;
         const uniqueId = Date.now(); 
-       // Exibe os valores gerados no log para depuração
+       
         cy.log(`Generated uniqueId: ${uniqueId}`);
         cy.log(`Generated uniqueName: ${uniqueName}`);
 
      
         const requestBody = {
-            id: uniqueId, // ID único para o recurso
+            id: uniqueId, 
             category: {
                 id: 1,
                 name:"",
@@ -34,15 +32,13 @@ describe.only('Testando o envio de um POST', () => {
         // Realiza o POST
         cy.request({
             method: 'POST',
-            url: 'https://petstore.swagger.io/v2/pet', // Substitua pelo endpoint correto
+            url: 'https://petstore.swagger.io/v2/pet', 
             body: requestBody,
             headers: {
-                'Content-Type': 'application/json', // Define o tipo de conteúdo
+                'Content-Type': 'application/json', 
             },
         }).then((response) => {
-            // Valida o status da resposta
-            expect(response.status).to.eq(200); // Status esperado para criação
-            // Valida se o body retornado corresponde ao enviado
+            expect(response.status).to.eq(200); 
             expect(response.body).to.have.property('id', uniqueId);
             expect(response.body).to.have.property('name', uniqueName);
             expect(response.body.category).to.deep.eq(requestBody.category);

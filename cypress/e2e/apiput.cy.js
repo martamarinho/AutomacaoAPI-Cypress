@@ -13,7 +13,7 @@ describe.only('Testando o envio de um PUT e DELETE', () => {
         cy.log(`Generated uniqueName: ${uniqueName}`);
         
         const requestBody = {
-            id: uniqueId, // ID único para o recurso
+            id: uniqueId, 
             category: {
                 id: 1,
                 name: "",
@@ -29,39 +29,35 @@ describe.only('Testando o envio de um PUT e DELETE', () => {
             status: "available",
         };
 
-        // Envia o PUT
         cy.request({
             method: 'PUT',
-            url: 'https://petstore.swagger.io/v2/pet', // Substitua pelo seu endpoint
+            url: 'https://petstore.swagger.io/v2/pet', 
             body: requestBody,
             headers: {
-                'Content-Type': 'application/json', // Define o tipo de conteúdo como JSON
+                'Content-Type': 'application/json', 
             },
         }).then((response) => {
-            // Valida o status da resposta do PUT
-            expect(response.status).to.eq(200); // Status esperado para atualização bem-sucedida
-            // Valida se o corpo da resposta corresponde ao enviado
+           
+            expect(response.status).to.eq(200); 
             expect(response.body).to.have.property('id', uniqueId);
             expect(response.body).to.have.property('name', uniqueName);
             expect(response.body.category).to.deep.eq(requestBody.category);
             expect(response.body.photoUrls).to.deep.eq(requestBody.photoUrls);
             expect(response.body.tags).to.deep.eq(requestBody.tags);
             
-            // Agora, realiza o DELETE utilizando o uniqueId do recurso
+            
             cy.request({
                 method: 'DELETE',
-                url: `https://petstore.swagger.io/v2/pet/${uniqueId}`, // Substitua pelo seu endpoint
+                url: `https://petstore.swagger.io/v2/pet/${uniqueId}`, 
             }).then((deleteResponse) => {
-                // Valida o status da resposta do DELETE
-                expect(deleteResponse.status).to.eq(200); // Status esperado para exclusão bem-sucedida
-
-                // Opcional: Valida se o recurso foi realmente excluído
+                 expect(deleteResponse.status).to.eq(200); 
+               
                 cy.request({
                     method: 'GET',
-                    url: `https://petstore.swagger.io/v2/pet/uniqueId`, // Verifica se o recurso foi excluído
-                    failOnStatusCode: false, // Não falha automaticamente se o status não for 200
+                    url: `https://petstore.swagger.io/v2/pet/uniqueId`, 
+                    failOnStatusCode: false, 
                 }).then((getResponse) => {
-                    expect(getResponse.status).to.eq(404); // Espera-se que o recurso não seja encontrado
+                    expect(getResponse.status).to.eq(404);
                 });
             });
         });
