@@ -7,10 +7,26 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+   steps:
+  - name: Checkout
+    uses: actions/checkout@v3
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
+  - name: Cypress run
+    uses: cypress-io/github-action@v5
+    with:
+      start: true  # Inicia os testes do Cypress
+
+  - name: Upload Cypress screenshots
+    uses: actions/upload-artifact@v5
+    with:
+      name: cypress-screenshots
+      path: cypress/screenshots
+      if-no-files-found: ignore  # Se não encontrar arquivos, ignora
+
+  - name: Upload Cypress videos
+    uses: actions/upload-artifact@v5
+    with:
+      name: cypress-videos
+      path: cypress/videos
+      if-no-files-found: ignore  # Se não encontrar arquivos, ignora
 
