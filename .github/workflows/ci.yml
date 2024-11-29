@@ -17,16 +17,15 @@ jobs:
           start: true  # Inicia os testes do Cypress
 
       - name: Upload Cypress screenshots
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v3  # Alterado para v3
         with:
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore  # Se não encontrar arquivos, ignora
 
       - name: Upload Cypress videos
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v3  # Alterado para v3
         with:
           name: cypress-videos
           path: cypress/videos
           if-no-files-found: ignore  # Se não encontrar arquivos, ignora
-
