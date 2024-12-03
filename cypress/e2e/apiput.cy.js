@@ -1,8 +1,8 @@
 describe.only('Testando o envio de um PUT e DELETE', () => {
     it('Deve retornar o status code do PUT, atualizar corretamente o recurso e então excluir o recurso', () => {
         
-        const animals = ["dog", "cat", "bird", "rabbit"];
-        const names = ["Fluffy", "Rex", "Mittens", "Whiskers"];
+        const animals = ["dog", "cat", "shitshu", "pincher"];
+        const names = ["Max", "Rex", "Lupy", "Lua"];
         const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
         const randomName = names[Math.floor(Math.random() * names.length)];
         const uniqueName = `${randomName}-${randomAnimal}`;
