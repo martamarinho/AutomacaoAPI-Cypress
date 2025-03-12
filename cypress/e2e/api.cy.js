@@ -4,10 +4,7 @@ describe('Testando o Status Code da API', () => {
             method: 'GET', 
             url: 'https://petstore.swagger.io/', 
         }).then((response) => {
-           
-
-            
-            
+        
             expect(response.status).to.eq(200);
 
             
