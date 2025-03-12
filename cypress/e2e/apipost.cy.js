@@ -14,6 +14,7 @@ describe.only('Testando o envio de um POST', () => {
      
         const requestBody = {
             id: uniqueId, 
+            
             category: {
                 id: 1,
                 name:"",
